@@ -22,6 +22,7 @@ function DataTable() {
   const [phone, setPhone] = useState("");
   const [website, setWebsite] = useState("");
   const [addingRow, setAddingRow] = useState(false);
+  // const [idie, setIdie] = useState(10);
 
   useEffect(() => {
     axios.get("https://jsonplaceholder.typicode.com/users").then((res) => {
@@ -57,34 +58,40 @@ function DataTable() {
 
   const classes = useStyles();
 
-  const handleAddRow = () => {
-    axios
-      .post("https://jsonplaceholder.typicode.com/users", {
-        name: name,
-        username: username,
-        email: email,
-        phone: phone,
-        website: website
-      })
-      .then((res) => {
-        setUserData([...userData, res.data]);
-      });
-  };
-
   // const handleAddRow = () => {
-  //   setAddingRow(false)
-  //   setUserData([
-  //     ...userData,
-  //     {
-  //       id: uuidv4(),
+  //   var value = idie + 1;
+  //   setIdie(value);
+  //   setAddingRow(false);
+  //   axios
+  //     .post("https://jsonplaceholder.typicode.com/users", {
+  //       id: idie,
   //       name: name,
   //       username: username,
   //       email: email,
   //       phone: phone,
   //       website: website
-  //     }
-  //   ]);
+  //     })
+  //     .then((res) => {
+  //       setUserData([...userData, res.data]);
+  //       console.log(res.data);
+  //       console.log(userData);
+  //     });
   // };
+
+  const handleAddRow = () => {
+    setAddingRow(false)
+    setUserData([
+      ...userData,
+      {
+        id: uuidv4(),
+        name: name,
+        username: username,
+        email: email,
+        phone: phone,
+        website: website
+      }
+    ]);
+  };
 
   const handleDelete = (item) => {
     const id = item;
