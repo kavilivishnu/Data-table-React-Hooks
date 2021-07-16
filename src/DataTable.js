@@ -79,19 +79,33 @@ function DataTable() {
   // };
 
   const handleAddRow = () => {
-    setAddingRow(false)
-    setUserData([
-      ...userData,
-      {
-        id: uuidv4(),
+    axios
+      .post("https://jsonplaceholder.typicode.com/users", {
         name: name,
         username: username,
         email: email,
         phone: phone,
         website: website
-      }
-    ]);
+      })
+      .then((res) => {
+        setUserData([...userData, res.data]);
+      });
   };
+
+  // const handleAddRow = () => {
+  //   setAddingRow(false)
+  //   setUserData([
+  //     ...userData,
+  //     {
+  //       id: uuidv4(),
+  //       name: name,
+  //       username: username,
+  //       email: email,
+  //       phone: phone,
+  //       website: website
+  //     }
+  //   ]);
+  // };
 
   const handleDelete = (item) => {
     const id = item;
